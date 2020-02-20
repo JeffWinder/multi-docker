@@ -1,0 +1,23 @@
+sudo: required
+services:
+    - docker
+
+before_install:
+    - docker build -t jeffwinder/react-test -f ./client/dev.Dockerfile ./client
+
+script:
+    - docker run jeffwinder/react-test npm test -- --coverage
+
+after_success:
+    - docker build -t jeffwinder/multi-client ./client
+    - docker build -t jeffwinder/multi-nginx ./nginx
+    - docker build -t jeffwinder/multi-server ./server
+    - docker build -t jeffwinder/multi-worker ./worker
+
+    # login to the docker cli
+    - echo "$DOCKER_PW" | docker login -u "$DOCKER_ID" --password-stdin
+    # push the images to docker hub
+    - docker push jeffwinder/multi-client
+    - docker push jeffwinder/multi-nginx
+    - docker push jeffwinder/multi-server
+    - docker push jeffwinder/multi-worker
