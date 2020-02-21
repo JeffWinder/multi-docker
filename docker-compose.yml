@@ -25,7 +25,7 @@ services:
             - PGPORT=5432
     client:
         build:
-            dockerfile:  dev.Dockerfile
+            dockerfile: dev.Dockerfile
             context: ./client
         volumes:
             - /app/node_modules
@@ -35,7 +35,7 @@ services:
             - REDIS_HOST=redis
             - REDIS_PORT=6379
         build:
-            dockerfile:  dev.Dockerfile
+            dockerfile: dev.Dockerfile
             context: ./worker
         volumes:
             - /app/node_modules
