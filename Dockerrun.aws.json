@@ -4,29 +4,37 @@
             "name": "client",
             "image": "jeffwinder/multi-client",
             "hostname": "client",
-            "essential": false
+            "essential": false,
+            "memory": 128
         },
         {
             "name": "server",
             "image": "jeffwinder/multi-server",
             "hostname": "api",
-            "essential": false
+            "essential": false,
+            "memory": 128
         },
         {
             "name": "worker",
             "image": "jeffwinder/multi-worker",
-            "essential": false
+            "hostname": "worker",
+            "essential": false,
+            "memory": 128
         },
         {
             "name": "nginx",
             "image": "jeffwinder/multi-nginx",
+            "hostname": "nginx",
             "essential": true,
             "portMappings": [{
                 "hostPort": 80,
                 "containerPort": 80
             }],
-            "links": ["client", "server"]
+            "links": [
+                "client",
+                "server"
+            ],
+            "memory": 128
         }
     ]
-
 }
