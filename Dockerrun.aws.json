@@ -17,14 +17,12 @@
         {
             "name": "worker",
             "image": "jeffwinder/multi-worker",
-            "hostname": "worker",
             "essential": false,
             "memory": 128
         },
         {
             "name": "nginx",
             "image": "jeffwinder/multi-nginx",
-            "hostname": "nginx",
             "essential": true,
             "portMappings": [{
                 "hostPort": 80,
